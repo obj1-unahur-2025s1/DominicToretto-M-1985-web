@@ -1,9 +1,13 @@
-import example.pepita
+// testExample.wtest
+// testExample.wtest
+import example.*
 
-describe "group of tests for pepita" {
+
+//assert.equals(100, pepita.energy())
+describe "group of tests Toreto" {
 
   test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+    assert.equals(100, 5)
   }
 
 }

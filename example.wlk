@@ -2,25 +2,6 @@
 // example.wlk
 // example.wlk
 // example.wlk
-// example.wlk
-// example.wlk
-// example.wlk
-// example.wlk
-// example.wlk
-// example.wlk
-// example.wlk
-// example.wlk
-// example.wlk
-object pepita {
-  var energy = 100
-
-  method energy() = energy
-
-  method fly(minutes) {
-    energy = energy - minutes * 3
-  }
-}
-
 object dominic {
   //la coleccion de autos es de dominic
   const autos = []
@@ -40,25 +21,22 @@ object dominic {
   }
 
   //indicacion, hacer prueba lo entinden los autos
-  method realizarPruebasDeVelocidad(){
-    autos.forEach(a => hacerPrueba())
-  }
+  method realizarPruebasDeVelocidad()=autos.forEach({a => a.hacerPrueba()})
+  
 
   method venderAutos(){
     autos.clear()
   }
 
   //asi los recorro con el clousure
-  method promedioVelocidades() = autos.sum({a=> velocidadMaxima()}) / autos.size()
+  method promedioVelocidades() = autos.sum({a=> a.velocidadMaxima()}) / autos.size()
 
   //sublista me retorn
-  method masRapido()=self.autosEnCondiciones(.max({a => a.velocidadMaxima()}))
+  method masRapido() = if(autos.autoEnCondiciones()) 
+  autos.max({a => a.velocidadMaxima()})
 
   //verdadero o falso
-  method hayUnAutoMuyRapido()= self.masRapido().velocidadMaxima()> 2*self.promedioVelocidades()
-
-
-
+  method hayUnAutoMuyRapido()= self.masRapido().velocidadMaxima() > 2 * self.promedioVelocidades()
 }
 
 //taller hace cosas es otro objeto
@@ -96,8 +74,7 @@ object flecha{
   //setter cambiar el atributo
   //method conbustible(unValor){combustible = unValor}
 
-  method enCondiciones()=
-  cantidadLitrosCombustible > combustible.nivelMinimo() && color == rojo
+  method enCondiciones()= cantidadLitrosCombustible > combustible.nivelMinimo() 
 
   method hacerPrueba(){
     cantidadLitrosCombustible = (cantidadLitrosCombustible -5).max(0)
@@ -137,11 +114,4 @@ object rojo{
 }
 object verde{
   method cambiarDeColor()=rojo
-}
-
-object intocable{
-  var property enCondiciones = true
-  methos hacerPrueba(){enCondiones = false}
-  method reparar(){enCondiones = true}
-  method velocidadMaxima()= 45
 }
